@@ -165,7 +165,7 @@
         case 'desiredValue':
             if (value) {
                 window.sessionStorage.setItem('desiredMarketValue', value);
-                renderTable(table, optionsData);
+                renderTable(table);
             }
             break;
         }
