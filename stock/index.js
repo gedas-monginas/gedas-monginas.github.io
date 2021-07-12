@@ -11,7 +11,7 @@
     }
 
     function getOptionsData() {
-        const storageData = window.sessionStorage.getItem('optionsData');
+        const storageData = window.localStorage.getItem('optionsData');
         if (storageData) {
             const optionsData = JSON.parse(storageData);
             if (optionsData && optionsData.length) {
@@ -22,7 +22,7 @@
     }
 
     function getDesiredMarketValue() {
-        return window.sessionStorage.getItem('desiredMarketValue') || 50;
+        return window.localStorage.getItem('desiredMarketValue') || 50;
     }
 
     function getNetValues(
@@ -125,7 +125,7 @@
         table,
         optionsData
     ) {
-        window.sessionStorage.setItem('optionsData', JSON.stringify(optionsData.filter(Boolean)));
+        window.localStorage.setItem('optionsData', JSON.stringify(optionsData.filter(Boolean)));
         renderTable(table);
     }
 
@@ -164,7 +164,7 @@
             break;
         case 'desiredValue':
             if (value) {
-                window.sessionStorage.setItem('desiredMarketValue', value);
+                window.localStorage.setItem('desiredMarketValue', value);
                 renderTable(table);
             }
             break;
