@@ -37,6 +37,14 @@
         };
     }
 
+    function outputValue (value, formatter) {
+        if (value < 0) {
+            return `(${formatter.format(value)})`;
+        } else {
+            return formatter.format(value);
+        }
+    }
+
     function renderTable(
         table,
     ) {
@@ -87,10 +95,10 @@
                 <td><input type="number" name="total" value="${data.total}"></td>
                 <td><input type="number" name="vested" value="${data.vested}"></td>
                 <td><input type="number" name="price" value="${data.price}"></td>
-                <td>${formatter.format(vestedValue)}</td>
-                <td>${formatter.format(totalValue)}</td>
-                <td>${formatter.format(dVestedValue)}</td>
-                <td>${formatter.format(dTotalValue)}</td>
+                <td>${outputValue(vestedValue, formatter)}</td>
+                <td>${outputValue(totalValue, formatter)}</td>
+                <td>${outputValue(dVestedValue, formatter)}</td>
+                <td>${outputValue(dTotalValue, formatter)}</td>
                 <td>
                     <a name="remove" href="#remove" class="button is-danger is-outlined is-small">Remove Row</a>
                 </td>
@@ -98,10 +106,10 @@
 
             totals.total += data.total;
             totals.vested += data.vested;
-            totals.vestedValue += vestedValue;
-            totals.totalValue += totalValue;
-            totals.dVestedValue += dVestedValue;
-            totals.dTotalValue += dTotalValue;
+            totals.vestedValue = vestedValue > 0 ? totals.vestedValue + vestedValue : totals.vestedValue;
+            totals.totalValue = totalValue > 0 ? totals.totalValue + totalValue : totals.totalValue;
+            totals.dVestedValue = dVestedValue > 0 ? totals.dVestedValue + dVestedValue : totals.dVestedValue;
+            totals.dTotalValue = dTotalValue > 0 ? totals.dTotalValue + dTotalValue : totals.dTotalValue;
         });
 
         tableRows += `
